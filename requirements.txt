@@ -1,0 +1,22 @@
+torch
+transformers
+peft
+trl
+bitsandbytes
+datasets
+accelerate
+sentence-transformers
+chromadb
+rank-bm25
+requests
+tqdm
+loguru
+pyyaml
+numpy
+fastapi
+uvicorn
+langchain
+langchain-community
+# RAGAS evaluation (src/10_ragas_eval.py)
+ragas
+langchain-ollama

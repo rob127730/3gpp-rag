@@ -1,0 +1,23 @@
+[
+  {
+    "model": "qwen25_7b",
+    "pipeline": "baseline",
+    "accuracy": 0.6,
+    "correct": 60,
+    "total": 100
+  },
+  {
+    "model": "llama31_8b",
+    "pipeline": "baseline",
+    "accuracy": 0.49,
+    "correct": 49,
+    "total": 100
+  },
+  {
+    "model": "mistral_7b",
+    "pipeline": "baseline",
+    "accuracy": 0.16,
+    "correct": 16,
+    "total": 100
+  }
+]

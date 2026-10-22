@@ -1,0 +1,13 @@
+{
+  "pipeline": "optimized",
+  "n": 20,
+  "gen_model": "qwen2.5:7b",
+  "judge_model": "qwen2.5:7b",
+  "scores": {
+    "faithfulness": 0.5363095238095237,
+    "answer_relevancy": 0.7876583804231356,
+    "context_precision": 0.48888888885787035,
+    "context_recall": 0.65
+  },
+  "date": "2026-10-19"
+}

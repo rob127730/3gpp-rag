@@ -1,0 +1,98 @@
+# ============================================================
+#  3GPP RAG Benchmark - Configuration Centrale
+#  3 Modèles x 4 Pipelines
+# ============================================================
+
+# --- Chemins ---
+paths:
+  data_dir: "."
+  docs_dir: "./3GPP-clean/3GPP-clean"
+  train_csv: "./Q_A_ID_training.csv"
+  test_teleqna: "./TeleQnA_training (1).txt"
+  train_teleqna: "./TeleQnA_training (1).txt"
+  questions: "./questions_new.txt"
+  chroma_db: "./chroma_db"
+  models_dir: "./models"
+  results_dir: "./results"
+  logs_dir: "./logs"
+
+# --- Modèles ---
+models:
+  qwen:
+    name: "Qwen/Qwen2.5-7B-Instruct"
+    short: "qwen25_7b"
+    max_new_tokens: 512
+    temperature: 0.1
+
+  llama:
+    name: "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    short: "llama31_8b"
+    max_new_tokens: 512
+    temperature: 0.1
+
+  mistral:
+    name: "mistralai/Mistral-7B-Instruct-v0.3"
+    short: "mistral_7b_v03"
+    max_new_tokens: 512
+    temperature: 0.1
+
+# --- Quantization (QLoRA 4-bit, 8GB VRAM) ---
+quantization:
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "float16"
+  bnb_4bit_use_double_quant: true
+  bnb_4bit_quant_type: "nf4"
+
+# --- RAG Baseline ---
+rag_baseline:
+  chunk_size: 500
+  chunk_overlap: 50
+  top_k: 5
+  embedding_model: "BAAI/bge-small-en-v1.5"
+  collection_name: "3gpp_baseline"
+
+# --- RAG Optimisé ---
+rag_optimized:
+  chunk_size: 256
+  chunk_overlap: 64
+  top_k_retrieval: 20       # récupère plus
+  top_k_rerank: 5           # rerank garde les 5 meilleurs
+  embedding_model: "BAAI/bge-base-en-v1.5"
+  reranker_model: "ms-marco-MiniLM-L-12-v2"
+  use_bm25_hybrid: true
+  bm25_weight: 0.3
+  dense_weight: 0.7
+  collection_name: "3gpp_optimized"
+
+# --- Fine-tuning QLoRA ---
+finetuning:
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules: ["q_proj", "v_proj", "k_proj", "o_proj"]
+  num_train_epochs: 1
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  learning_rate: 2.0e-4
+  warmup_ratio: 0.03
+  lr_scheduler_type: "cosine"
+  max_seq_length: 512
+  save_steps: 50
+  logging_steps: 10
+  eval_steps: 50
+  fp16: true
+  output_dir_template: "./models/{model_short}_finetuned"
+# --- Évaluation ---
+evaluation:
+  metrics:
+    - exact_match
+    - rouge1
+    - rouge2
+    - rougeL
+    - bertscore
+    - bleu
+    - f1
+  bertscore_model: "microsoft/deberta-xlarge-mnli"
+  batch_size: 8
+  results_file: "./results/benchmark_results.csv"
+  report_file: "./results/benchmark_report.html"

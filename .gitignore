@@ -1,0 +1,22 @@
+# secrets
+token.txt
+tokens_*.txt
+*.env
+.env
+# data & heavy artefacts (rebuild with the scripts in src/)
+3GPP-clean/
+chroma_db/
+models/
+raft_models/
+*.npy
+bm25_chunks_cache.json
+TeleQnA*
+questions_new.txt
+Q_A_ID_training.csv
+raft_dataset*.json
+results/
+logs/
+ppt/
+*.docx
+__pycache__/
+*.pyc

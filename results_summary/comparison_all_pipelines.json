@@ -1,0 +1,23 @@
+[
+  {
+    "model": "qwen25_7b",
+    "rag_baseline": 0.66,
+    "rag_optimized": 0.78,
+    "finetuned": 0.31,
+    "delta_ft_vs_baseline": -0.35
+  },
+  {
+    "model": "llama31_8b",
+    "rag_baseline": 0.6,
+    "rag_optimized": 0.75,
+    "finetuned": 0.62,
+    "delta_ft_vs_baseline": 0.02
+  },
+  {
+    "model": "mistral_7b",
+    "rag_baseline": 0.21,
+    "rag_optimized": 0.25,
+    "finetuned": 0.61,
+    "delta_ft_vs_baseline": 0.4
+  }
+]
