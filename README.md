@@ -4,6 +4,8 @@ A hands-on comparison of **RAG, hybrid retrieval + reranking, QLoRA fine-tuning,
 
 > Student project (ESMT Dakar, Data & AI). Accuracy numbers come from **100 TeleQnA multiple-choice questions** and RAGAS numbers from **20 questions** — small samples, so differences of a few points are not significant.
 
+![Retrieval pipeline, animated](docs/pipeline_flow.gif)
+
 ![Accuracy by pipeline](docs/accuracy.png)
 
 ## Key finding
